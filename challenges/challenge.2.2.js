@@ -58,11 +58,11 @@ const areSimilarCandidates = (candidate1, candidate2) => {
   const cand1bd = candidate1.dateOfBirth.getTime()
   const cand2bd = candidate2.dateOfBirth.getTime()
   let difference = (cand1bd - cand2bd) / (24 * 60 * 60 * 1000)
+  let normalizedOne = normalizedName(candidate1.name)
+  let normalizedtwo = normalizedName(candidate2.name)
   if (difference < 0) {
     difference = -1 * difference
   }
-  let normalizedOne = normalizedName(candidate1.name)
-  let normalizedtwo = normalizedName(candidate2.name)
   if (difference <= 10 && normalizedOne === normalizedtwo) {
     return true
   }
@@ -78,8 +78,13 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
   // ------ Challenge 2.2.3 - Complete the function here ---- //
-
-  return [];
+  let newArray = []
+  candidateList.forEach(candidate => {
+    if (newCandidate.name === candidate.name) {
+      newArray.push(candidate)
+    }
+  })
+  return newArray;
 };
 
 /**

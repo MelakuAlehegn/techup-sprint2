@@ -89,8 +89,18 @@ const orderByWeightedSkills = (candidateList) => {
  * @returns a floating point number indicating the ratio
  */
 const genderRatio = (candidateList) => {
-
   // ----- Challenge 2.1.5 - Complete the function here ---- //
+  let female = 0
+  let male = 0
+  candidateList.forEach(candidate => {
+    if (candidate.gender === 'F') {
+      female += 1
+    }
+    else if (candidate.gender === 'M') {
+      male += 1
+    }
+  })
+  return female / male
 };
 
 /**

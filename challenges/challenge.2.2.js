@@ -30,8 +30,18 @@ import { Candidate } from '../common/model.js';
  */
 const normalizedName = (name) => {
   // ----- Challenge 2.2.1 - Complete the function here ---- //
-
-  return name;
+  name = name.replace(/[^a-zA-Z]/g, "") // remove all non characters
+  let firstChar = name.charAt(0)
+  let restChar = name.slice(1)
+  name = firstChar + restChar.replace(/[aeiou]/gi, '') // replace all the vowel letters
+  name = name.toUpperCase()
+  let result = '';
+  for (let i = 0; i < name.length; i++) {
+    if (!result.includes(name[i])) {
+      result += name[i]
+    }
+  }
+  return result
 };
 
 /**

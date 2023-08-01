@@ -20,8 +20,9 @@ import { Job, Candidate, Skill } from '../common/model.js';
  */
 const filterByDate = (jobs, startDate, endDate) => {
   // ----- Challenge 2.1.1 - Complete the function here ---- //
-
-  return [];
+  return jobs.filter(job => {
+    return job.startDate >= startDate && job.startDate <= endDate
+  });
 };
 
 /**

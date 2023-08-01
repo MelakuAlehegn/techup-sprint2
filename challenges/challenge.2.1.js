@@ -33,8 +33,9 @@ const filterByDate = (jobs, startDate, endDate) => {
  */
 const filterByBornAfter = (candidates, date) => {
   // ----- Challenge 2.1.2 - Complete the function here ---- //
-
-  return [];
+  return candidates.filter(cand => {
+    return cand.dateOfBirth >= date
+  })
 };
 
 /**

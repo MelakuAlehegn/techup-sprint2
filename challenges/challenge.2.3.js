@@ -33,8 +33,9 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  */
 const suitableGender = (candidate, job) => {
   // ----- Challenge 2.3.2 - Complete the function here ---- //
-  return false;
+  return job.requiredGender === candidate.gender || job.requiredGender === "" ? true : false
 };
+
 
 /**
  *

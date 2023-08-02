@@ -35,9 +35,10 @@ const normalizedName = (name) => {
   let restChar = name.slice(1)
   name = firstChar + restChar.replace(/[aeiou]/gi, '') // replace all the vowel letters
   name = name.toUpperCase()
-  let result = '';
+  // console.log(name)
+  let result = ''
   for (let i = 0; i < name.length; i++) {
-    if (!result.includes(name[i])) {
+    if (name[i] !== name[i + 1]) {
       result += name[i]
     }
   }

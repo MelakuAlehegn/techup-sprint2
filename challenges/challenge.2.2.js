@@ -74,7 +74,7 @@ const possibleDuplicates = (newCandidate, candidateList) => {
   // ------ Challenge 2.2.3 - Complete the function here ---- //
   let newArray = []
   candidateList.forEach(candidate => {
-    if (newCandidate.name === candidate.name) {
+    if (areSimilarCandidates(candidate, newCandidate) === true) {
       newArray.push(candidate)
     }
   })
@@ -98,8 +98,19 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  */
 const candidateIndex = (candidateList) => {
   // ------ Challenge 2.2.4 - Complete the function here ---- //
-  return 0;
-};
+  let obj = {}
+  for (let i = 0; i < candidateList.length; i++) {
+    let normalizedNameval = normalizedName(candidateList[i].name)
+    if (normalizedNameval in obj) {
+      obj[normalizedNameval].push(candidateList[i])
+    }
+    else {
+      obj[normalizedNameval] = [candidateList[i]]
+    }
+  }
+  return obj
+}
+
 
 /**
  * Find the number of (likely) duplicates in the given list,

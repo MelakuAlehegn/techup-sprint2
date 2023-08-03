@@ -124,8 +124,7 @@ const candidateIndex = (candidateList) => {
  */
 const duplicateCount = (candidateList) => {
   // ------ Challenge 2.2.5 - Complete the function here ---- //
-
-  return 0;
+  return 0
 };
 
 export { normalizedName, areSimilarCandidates, possibleDuplicates, duplicateCount, candidateIndex };

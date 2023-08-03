@@ -51,8 +51,24 @@ const suitableGender = (candidate, job) => {
  */
 const suitabilityScore = (candidate, job) => {
   // ----- Challenge 2.3.3 - Complete the function here ---- //
+  let genderScore = 0;
+  let skillScore = 0;
+  if (suitableGender(candidate, job)) {
+    genderScore += 20
+  }
+  for (let i = 0; i < candidate.skills.length; i++) {
+    for (let j = 0; j < job.requiredSkills.length; j++) {
+      if (candidate.skills[i].name === job.requiredSkills[j].name) {
+        if (candidate.skills[i].level >= job.requiredSkills[j].level) {
+          skillScore += 1
+        }
+      }
+    }
 
-  return 0;
+  }
+  let suitabilityScore = (skillScore / job.requiredSkills.length) * 80 + genderScore
+  suitabilityScore = Math.round(suitabilityScore)
+  return suitabilityScore;
 };
 
 /**
@@ -67,8 +83,19 @@ const suitabilityScore = (candidate, job) => {
  */
 const hottestCandidate = (candidates, jobs) => {
   // ----- Challenge 2.3.4 - Complete the function here ---- //
-
-  return 0;
+  let hotnessList = []
+  let counter = 0
+  candidates.forEach(candidate => {
+    jobs.forEach(job => {
+      if (suitabilityScore(candidate, job) > 80) {
+        counter++
+      }
+    })
+    hotnessList.push(counter)
+    counter = 0
+  })
+  hotnessList.sort((a, b) => b - a)
+  return hotnessList[0];
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };

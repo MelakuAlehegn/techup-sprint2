@@ -122,7 +122,6 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-
   // ----- Challenge 2.1.7 - Complete the function here ---- //
 
 };

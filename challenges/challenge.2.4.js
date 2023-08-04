@@ -24,8 +24,6 @@ import { Candidate } from '../common/model.js';
  */
 const totalBonuses = (candidate, initialBonus) => {
   // ----- Challenge 2.4.1 - Complete the function here ---- //
-
-  return 0;
 };
 
 export { totalBonuses };

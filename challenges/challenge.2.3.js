@@ -94,8 +94,7 @@ const hottestCandidate = (candidates, jobs) => {
     hotnessList.push(counter)
     counter = 0
   })
-  hotnessList.sort((a, b) => b - a)
-  return hotnessList[0];
+  return Math.max(...hotnessList);
 };
 
 export { skillsMatch, suitableGender, suitabilityScore, hottestCandidate };

@@ -47,7 +47,6 @@ const filterByBornAfter = (candidates, date) => {
  * @returns
  */
 const orderBySkills = (candidateList) => {
-  // ----- Challenge 2.1.3 - Complete the function here ---- //
   return candidateList.sort((a, b) => {
     return b.skills.length - a.skills.length
   })
@@ -62,7 +61,6 @@ const orderBySkills = (candidateList) => {
  * @returns
  */
 const orderByWeightedSkills = (candidateList) => {
-  // ----- Challenge 2.1.4 - Complete the function here ---- //
   candidateList.forEach(candidate => {
     candidate.skills.forEach(skill => {
       if (skill.level === 0) {
@@ -89,7 +87,6 @@ const orderByWeightedSkills = (candidateList) => {
  * @returns a floating point number indicating the ratio
  */
 const genderRatio = (candidateList) => {
-  // ----- Challenge 2.1.5 - Complete the function here ---- //
   let female = 0
   let male = 0
   candidateList.forEach(candidate => {
@@ -110,11 +107,21 @@ const genderRatio = (candidateList) => {
  * @returns number (0-11)
  */
 const busiestMonth = (jobs) => {
-  // ----- Challenge 2.1.6 - Complete the function here ---- //
-
-  return 0;
+  let obj = {}
+  jobs.forEach(job => {
+    let startMonth = job.startDate.getMonth()
+    if (startMonth in obj) {
+      obj[startMonth] += 1
+    }
+    else {
+      obj[startMonth] = 1
+    }
+  })
+  let maxim = Object.keys(obj).reduce((a, b) => {
+    return obj[a] > obj[b] ? a : b
+  })
+  return maxim - 1;
 };
-
 /**
  * Return the skill name that is required the most in the given list of Jobs,
  * indicated by the requiredSkills property of each Job.
@@ -122,8 +129,22 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-  // ----- Challenge 2.1.7 - Complete the function here ---- //
-
+  let obj = {}
+  jobs.forEach(job => {
+    job.requiredSkills.forEach(skill => {
+      let requiredSkill = skill.name
+      if (requiredSkill in obj) {
+        obj[requiredSkill] += 1
+      }
+      else {
+        obj[requiredSkill] = 1
+      }
+    })
+  })
+  let maxim = Object.keys(obj).reduce((a, b) => {
+    return obj[a] > obj[b] ? a : b
+  })
+  return maxim;
 };
 
 export { filterByDate, filterByBornAfter, orderBySkills, orderByWeightedSkills, genderRatio, busiestMonth, mostInDemandSkill };

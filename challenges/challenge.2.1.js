@@ -129,7 +129,22 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-
+  let obj = {}
+  jobs.forEach(job => {
+    job.requiredSkills.forEach(skill => {
+      let requiredSkill = skill.name
+      if (requiredSkill in obj) {
+        obj[requiredSkill] += 1
+      }
+      else {
+        obj[requiredSkill] = 1
+      }
+    })
+  })
+  let maxim = Object.keys(obj).reduce((a, b) => {
+    return obj[a] > obj[b] ? a : b
+  })
+  return maxim;
 };
 
 export { filterByDate, filterByBornAfter, orderBySkills, orderByWeightedSkills, genderRatio, busiestMonth, mostInDemandSkill };

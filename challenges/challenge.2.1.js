@@ -21,7 +21,7 @@ import { Job, Candidate, Skill } from '../common/model.js';
 const filterByDate = (jobs, startDate, endDate) => {
   // ----- Challenge 2.1.1 - Complete the function here ---- //
   return jobs.filter(job => {
-    return job.startDate >= startDate && job.startDate <= endDate
+    return job.startDate >= startDate && job.startDate <= endDate;
   });
 };
 
@@ -35,8 +35,8 @@ const filterByDate = (jobs, startDate, endDate) => {
 const filterByBornAfter = (candidates, date) => {
   // ----- Challenge 2.1.2 - Complete the function here ---- //
   return candidates.filter(cand => {
-    return cand.dateOfBirth >= date
-  })
+    return cand.dateOfBirth >= date;
+  });
 };
 
 /**
@@ -48,8 +48,8 @@ const filterByBornAfter = (candidates, date) => {
  */
 const orderBySkills = (candidateList) => {
   return candidateList.sort((a, b) => {
-    return b.skills.length - a.skills.length
-  })
+    return b.skills.length - a.skills.length;
+  });
 };
 
 /**
@@ -63,21 +63,15 @@ const orderBySkills = (candidateList) => {
 const orderByWeightedSkills = (candidateList) => {
   candidateList.forEach(candidate => {
     candidate.skills.forEach(skill => {
-      if (skill.level === 0) {
-        skill.level = 1
-      }
-      else if (skill.level === 1) {
-        skill.level = 5
-      }
-      else if (skill.level === 2) {
-        skill.level = 10
-      }
-    })
-  })
+      if (skill.level === 0) skill.level = 1;
+      else if (skill.level === 1) skill.level = 5;
+      else if (skill.level === 2) skill.level = 10;
+    });
+  });
   return candidateList.sort((a, b) => {
-    const sumA = a.skills.reduce((sum, skill) => sum + skill.level, 0)
-    const sumB = b.skills.reduce((sum, skill) => sum + skill.level, 0)
-    return sumB - sumA
+    const sumA = a.skills.reduce((sum, skill) => sum + skill.level, 0);
+    const sumB = b.skills.reduce((sum, skill) => sum + skill.level, 0);
+    return sumB - sumA;
   });
 };
 
@@ -87,17 +81,13 @@ const orderByWeightedSkills = (candidateList) => {
  * @returns a floating point number indicating the ratio
  */
 const genderRatio = (candidateList) => {
-  let female = 0
-  let male = 0
+  let female = 0;
+  let male = 0;
   candidateList.forEach(candidate => {
-    if (candidate.gender === 'F') {
-      female += 1
-    }
-    else if (candidate.gender === 'M') {
-      male += 1
-    }
-  })
-  return female / male
+    if (candidate.gender === 'F') female += 1;
+    else if (candidate.gender === 'M') male += 1;
+  });
+  return female / male;
 };
 
 /**
@@ -107,19 +97,15 @@ const genderRatio = (candidateList) => {
  * @returns number (0-11)
  */
 const busiestMonth = (jobs) => {
-  let obj = {}
+  const obj = {};
   jobs.forEach(job => {
-    let startMonth = job.startDate.getMonth()
-    if (startMonth in obj) {
-      obj[startMonth] += 1
-    }
-    else {
-      obj[startMonth] = 1
-    }
-  })
-  let maxim = Object.keys(obj).reduce((a, b) => {
-    return obj[a] > obj[b] ? a : b
-  })
+    const startMonth = job.startDate.getMonth();
+    if (startMonth in obj) obj[startMonth] += 1;
+    else obj[startMonth] = 1;
+  });
+  const maxim = Object.keys(obj).reduce((a, b) => {
+    return obj[a] > obj[b] ? a : b;
+  });
   return maxim - 1;
 };
 /**
@@ -129,21 +115,17 @@ const busiestMonth = (jobs) => {
  * @param {Array<Job>} jobs
  */
 const mostInDemandSkill = (jobs) => {
-  let obj = {}
+  const obj = {};
   jobs.forEach(job => {
     job.requiredSkills.forEach(skill => {
-      let requiredSkill = skill.name
-      if (requiredSkill in obj) {
-        obj[requiredSkill] += 1
-      }
-      else {
-        obj[requiredSkill] = 1
-      }
-    })
-  })
-  let maxim = Object.keys(obj).reduce((a, b) => {
-    return obj[a] > obj[b] ? a : b
-  })
+      const requiredSkill = skill.name;
+      if (requiredSkill in obj) obj[requiredSkill] += 1;
+      else obj[requiredSkill] = 1;
+    });
+  });
+  const maxim = Object.keys(obj).reduce((a, b) => {
+    return obj[a] > obj[b] ? a : b;
+  });
   return maxim;
 };
 

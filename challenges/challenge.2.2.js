@@ -29,19 +29,18 @@ import { Candidate } from '../common/model.js';
  * @returns String
  */
 const normalizedName = (name) => {
-  // ----- Challenge 2.2.1 - Complete the function here ---- //
-  name = name.replace(/[^a-zA-Z]/g, "") // remove all non characters
-  let firstChar = name.charAt(0)
-  let restChar = name.slice(1)
-  name = firstChar + restChar.replace(/[aeiou]/gi, '') // replace all the vowel letters
-  name = name.toUpperCase()
-  let result = ''
+  name = name.replace(/[^a-zA-Z]/g, '');
+  const firstChar = name.charAt(0);
+  const restChar = name.slice(1);
+  name = firstChar + restChar.replace(/[aeiou]/gi, '');
+  name = name.toUpperCase();
+  let result = '';
   for (let i = 0; i < name.length; i++) {
     if (name[i] !== name[i + 1]) {
-      result += name[i]
+      result += name[i];
     }
   }
-  return result
+  return result;
 };
 
 /**
@@ -54,10 +53,9 @@ const normalizedName = (name) => {
  * @returns true or false
  */
 const areSimilarCandidates = (candidate1, candidate2) => {
-  // ----- Challenge 2.2.2 - Complete the function here ---- //
-  let difference = Math.abs((candidate1.dateOfBirth.getTime() - candidate2.dateOfBirth.getTime()) / (24 * 60 * 60 * 1000))
+  const difference = Math.abs((candidate1.dateOfBirth.getTime() - candidate2.dateOfBirth.getTime()) / (24 * 60 * 60 * 1000));
   if (difference <= 10 && normalizedName(candidate1.name) === normalizedName(candidate2.name)) {
-    return true
+    return true;
   }
   return false;
 };
@@ -70,13 +68,12 @@ const areSimilarCandidates = (candidate1, candidate2) => {
  * @param {Array<Candidate>} candidateList
  */
 const possibleDuplicates = (newCandidate, candidateList) => {
-  // ------ Challenge 2.2.3 - Complete the function here ---- //
-  let newArray = []
+  const newArray = [];
   candidateList.forEach(candidate => {
     if (areSimilarCandidates(candidate, newCandidate) === true) {
-      newArray.push(candidate)
+      newArray.push(candidate);
     }
-  })
+  });
   return newArray;
 };
 
@@ -96,20 +93,14 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  * @returns
  */
 const candidateIndex = (candidateList) => {
-  // ------ Challenge 2.2.4 - Complete the function here ---- //
-  let obj = {}
+  const obj = {};
   for (let i = 0; i < candidateList.length; i++) {
-    let normalizedNameval = normalizedName(candidateList[i].name)
-    if (normalizedNameval in obj) {
-      obj[normalizedNameval].push(candidateList[i])
-    }
-    else {
-      obj[normalizedNameval] = [candidateList[i]]
-    }
+    const normalizedNameval = normalizedName(candidateList[i].name);
+    if (normalizedNameval in obj) obj[normalizedNameval].push(candidateList[i]);
+    else obj[normalizedNameval] = [candidateList[i]];
   }
-  return obj
-}
-
+  return obj;
+};
 
 /**
  * Find the number of (likely) duplicates in the given list,
@@ -122,8 +113,17 @@ const candidateIndex = (candidateList) => {
  * @returns
  */
 const duplicateCount = (candidateList) => {
-  // ------ Challenge 2.2.5 - Complete the function here ---- //
-  return 0
+  let count = 0;
+  const duplicated = [];
+  candidateList.forEach((candidate) => {
+    if (duplicated.includes(candidate) ||
+      possibleDuplicates(candidate, candidateList).length < 2) {
+      return;
+    }
+    duplicated.push(...possibleDuplicates(candidate, candidateList));
+    count++;
+  });
+  return count;
 };
 
 export { normalizedName, areSimilarCandidates, possibleDuplicates, duplicateCount, candidateIndex };

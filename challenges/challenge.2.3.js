@@ -18,7 +18,7 @@ import { Candidate, Job } from '../common/model.js';
  * @param {Skill} jobSkill
  */
 const skillsMatch = (candidateSkill, jobSkill) => {
-  return candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() && candidateSkill.level >= jobSkill.level
+  return candidateSkill.name.toLowerCase() === jobSkill.name.toLowerCase() && candidateSkill.level >= jobSkill.level;
 };
 
 /**
@@ -30,10 +30,8 @@ const skillsMatch = (candidateSkill, jobSkill) => {
  * @param {Job} job
  */
 const suitableGender = (candidate, job) => {
-  // ----- Challenge 2.3.2 - Complete the function here ---- //
-  return job.requiredGender === candidate.gender || job.requiredGender === undefined ? true : false
+  return job.requiredGender === candidate.gender || job.requiredGender === undefined;
 };
-
 
 /**
  *
@@ -48,24 +46,22 @@ const suitableGender = (candidate, job) => {
  * @returns String
  */
 const suitabilityScore = (candidate, job) => {
-  // ----- Challenge 2.3.3 - Complete the function here ---- //
   let genderScore = 0;
   let skillScore = 0;
   if (suitableGender(candidate, job)) {
-    genderScore += 20
+    genderScore += 20;
   }
   for (let i = 0; i < candidate.skills.length; i++) {
     for (let j = 0; j < job.requiredSkills.length; j++) {
       if (candidate.skills[i].name.toLowerCase() === job.requiredSkills[j].name.toLowerCase()) {
         if (candidate.skills[i].level >= job.requiredSkills[j].level) {
-          skillScore += 1
+          skillScore += 1;
         }
       }
     }
-
   }
-  let suitabilityScore = (skillScore / job.requiredSkills.length) * 80 + genderScore
-  suitabilityScore = Math.round(suitabilityScore)
+  let suitabilityScore = (skillScore / job.requiredSkills.length) * 80 + genderScore;
+  suitabilityScore = Math.round(suitabilityScore);
   return suitabilityScore;
 };
 
@@ -81,17 +77,17 @@ const suitabilityScore = (candidate, job) => {
  */
 const hottestCandidate = (candidates, jobs) => {
   // ----- Challenge 2.3.4 - Complete the function here ---- //
-  let hotnessList = []
-  let counter = 0
+  const hotnessList = [];
+  let counter = 0;
   candidates.forEach(candidate => {
     jobs.forEach(job => {
       if (suitabilityScore(candidate, job) > 80) {
-        counter++
+        counter++;
       }
-    })
-    hotnessList.push(counter)
-    counter = 0
-  })
+    });
+    hotnessList.push(counter);
+    counter = 0;
+  });
   return Math.max(...hotnessList);
 };
 

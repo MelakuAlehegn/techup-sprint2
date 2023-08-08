@@ -29,3 +29,10 @@ test('Possible duplicate test', () => {
             "ABRHM": [c4, c5]
         })
 })
+test('Possible duplicate test', () => {
+    expect(
+        Utils.candidateIndex([c5]))
+        .toEqual({
+            "ABRHM": [c5]
+        })
+})

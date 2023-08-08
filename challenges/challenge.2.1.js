@@ -84,8 +84,7 @@ const genderRatio = (candidateList) => {
   let female = 0;
   let male = 0;
   candidateList.forEach(candidate => {
-    if (candidate.gender === 'F') female += 1;
-    else if (candidate.gender === 'M') male += 1;
+    candidate.gender === 'F' ? female += 1 : male += 1;
   });
   return female / male;
 };

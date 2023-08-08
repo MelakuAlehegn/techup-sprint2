@@ -105,8 +105,8 @@ const busiestMonth = (jobs) => {
   });
   const maxim = Object.keys(obj).reduce((a, b) => {
     return obj[a] > obj[b] ? a : b;
-  });
-  return maxim - 1;
+  }, 0);
+  return Number(maxim);
 };
 /**
  * Return the skill name that is required the most in the given list of Jobs,

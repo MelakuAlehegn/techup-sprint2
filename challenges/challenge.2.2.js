@@ -94,10 +94,10 @@ const possibleDuplicates = (newCandidate, candidateList) => {
  */
 const candidateIndex = (candidateList) => {
   const obj = {};
-  for (let i = 0; i < candidateList.length; i++) {
-    const normalizedNameval = normalizedName(candidateList[i].name);
-    if (normalizedNameval in obj) obj[normalizedNameval].push(candidateList[i]);
-    else obj[normalizedNameval] = [candidateList[i]];
+  for (const i of candidateList) {
+    const normalizedNameval = normalizedName(i.name);
+    if (normalizedNameval in obj) obj[normalizedNameval].push(i);
+    else obj[normalizedNameval] = [i];
   }
   return obj;
 };
